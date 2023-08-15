@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import LoginForm from "../Molecules/LoginForm";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (

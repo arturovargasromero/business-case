@@ -1,6 +1,8 @@
 import { Box, Typography, Link, Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 const index = () => {
+  const router = useRouter();
   return (
     <>
       <Box
@@ -29,21 +31,20 @@ const index = () => {
           >
             En este pequeño proyecto podras visualizar tus productos e
             interactuar con ellos, como tambien podras ver la información de tu
-            perfil,
+            perfil.
           </Typography>
-          <Link href="/login">
-            <Button
-              sx={{
-                marginTop: "60px",
-                width: "100%",
-                maxWidth: "300px",
-                margin: "0 0 60px 0",
-              }}
-              variant="contained"
-            >
-              Ingresar
-            </Button>
-          </Link>
+          <Button
+            sx={{
+              marginTop: "60px",
+              width: "100%",
+              maxWidth: "300px",
+              margin: "0 0 60px 0",
+            }}
+            variant={"contained"}
+            onClick={() => router.push("login")}
+          >
+            Ingresar
+          </Button>
           <img
             src="/images/Home/HomeImage.jpg"
             alt="home image"

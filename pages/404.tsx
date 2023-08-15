@@ -37,7 +37,7 @@ export default function notFoud() {
               fontSize: { xs: "14px", md: "40px" },
             }}
           >
-            Upps! no pudimos encontrar esta página
+            Página no encontrada
           </Typography>
         </Box>
       </Box>
