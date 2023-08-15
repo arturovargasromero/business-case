@@ -64,6 +64,8 @@ const LoginForm = () => {
         {!emailValidate && (
           <Typography
             sx={{
+              width: "100%",
+              maxWidth: "300px",
               fontSize: "10px",
               textAlign: "left",
               color: "red",
@@ -87,6 +89,8 @@ const LoginForm = () => {
         {!passwordValidate && (
           <Typography
             sx={{
+              width: "100%",
+              maxWidth: "300px",
               fontSize: "10px",
               textAlign: "left",
               color: "red",
