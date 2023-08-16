@@ -71,8 +71,7 @@ const LoginForm = () => {
               color: "red",
             }}
           >
-            La contraseña debe tener al menos una mayúscula, una minúscula y un
-            número
+            Este correo no es valido
           </Typography>
         )}
         <TextField
@@ -108,6 +107,14 @@ const LoginForm = () => {
           maxWidth: "300px",
         }}
         variant="contained"
+        disabled={
+          emailValidate &&
+          passwordValidate &&
+          credentials.email !== "" &&
+          credentials.password !== ""
+            ? false
+            : true
+        }
         type="submit"
       >
         Ingresar

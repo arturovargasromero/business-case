@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import SearchInput from "./SearchInput";
 import { useEffect, useState } from "react";
-import FullFeaturedCrudGrid from "./ProductTable2";
+import ProductTable from "./ProductTable";
 import ProductDialog from "./ProductDialog";
 import { listProductsQuery } from "@/callFunction/ListProducsQuery";
 
@@ -23,7 +23,6 @@ const index = () => {
       try {
         const listProducts = await listProductsQuery();
         setDataRow(JSON.parse(dataLocal || ""));
-        console.log(typeof JSON.parse(dataLocal || ""), "data local");
         if (JSON.parse(dataLocal || "").length <= 0) {
           localStorage.setItem(
             "dataRow",
@@ -50,58 +49,71 @@ const index = () => {
   }
   return (
     <Box sx={{ padding: "40px 30px" }}>
-      <Typography
-        sx={{
-          fontWeight: "900",
-          fontSize: "22px",
-        }}
-      >
-        Alta de Productos
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "end",
-          alignItems: "center",
-          marginTop: "20px",
-        }}
-      >
-        <SearchInput setSearchFolio={setSearchFolio} />
-        <Button
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
           sx={{
-            maxWidth: "300px",
-          }}
-          variant="contained"
-          onClick={() => {
-            setDialogData({ open: true, action: "agregar" });
-            // setOpenCreateProduct(true);
+            maxWidth: "900px",
+            width: "100%",
           }}
         >
-          <Typography sx={{ fontSize: "14px" }}>Agregar</Typography>
-        </Button>
-        <ProductDialog
-          dialogData={dialogData}
-          setDialogData={setDialogData}
-          setDataRow={setDataRow}
-        />
+          <Typography
+            sx={{
+              fontWeight: "900",
+              fontSize: "22px",
+            }}
+          >
+            Alta de Productos
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+              marginTop: "20px",
+            }}
+          >
+            <SearchInput setSearchFolio={setSearchFolio} />
+            <Button
+              sx={{
+                maxWidth: "300px",
+              }}
+              variant="contained"
+              onClick={() => {
+                setDialogData({ open: true, action: "agregar" });
+                // setOpenCreateProduct(true);
+              }}
+            >
+              <Typography sx={{ fontSize: "14px" }}>Agregar</Typography>
+            </Button>
+            <ProductDialog
+              dialogData={dialogData}
+              setDialogData={setDialogData}
+              setDataRow={setDataRow}
+            />
+          </Box>
+        </Box>
       </Box>
-      <Box
-        sx={{
-          height: 400,
-          width: "100%",
-          background: "#FFFFFF",
-          borderRadius: "20px",
-          marginTop: "20px",
-        }}
-      >
-        <FullFeaturedCrudGrid
-          rows={searchedFolio}
-          dataRow={dataRow}
-          setDataRow={setDataRow}
-          dialogData={dialogData}
-          setDialogData={setDialogData}
-          loading={loading}
-        />
+
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            height: 400,
+            width: "100%",
+            background: "#FFFFFF",
+            borderRadius: "20px",
+            marginTop: "20px",
+            maxWidth: "900px",
+          }}
+        >
+          <ProductTable
+            rows={searchedFolio}
+            dataRow={dataRow}
+            setDataRow={setDataRow}
+            dialogData={dialogData}
+            setDialogData={setDialogData}
+            loading={loading}
+          />
+        </Box>
       </Box>
     </Box>
   );

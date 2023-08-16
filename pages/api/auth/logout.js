@@ -17,11 +17,8 @@ export default function logoutHandler(req, res) {
       path: "/",
     });
     res.setHeader("Set-Cookie", serialized);
-    res.status(200).json({
-      message: "Logout succesfully",
-      user: user.username,
-      email: user.email,
-    });
+    console.log(user);
+    res.status(200).json("Logout succesfully");
   } catch (error) {
     return res.status(401).json({ error: "invalid token" });
   }

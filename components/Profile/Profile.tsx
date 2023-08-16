@@ -29,9 +29,7 @@ const Profile = () => {
           }}
         ></Box>
         <Box>
-          <Typography sx={{ fontWeight: "600", fontSize: "18px" }}>
-            Nombre usuario
-          </Typography>
+          <Typography sx={{ fontWeight: "600", fontSize: "18px" }}></Typography>
           <Typography sx={{ fontWeight: "300", fontSize: "16px" }}>
             correo@correo.com
           </Typography>

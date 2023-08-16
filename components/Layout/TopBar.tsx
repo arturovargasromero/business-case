@@ -89,12 +89,28 @@ const TopBar = () => {
           justifyContent: "space-between",
         }}
       >
-        <Link
-          sx={{ textDecoration: "none", color: "#000000" }}
-          href={sessionUser ? "products" : "/"}
+        <Button
+          sx={{
+            p: 0,
+            margin: "12px 10px",
+            padding: "5px 10px",
+            borderRadius: "10px",
+            color: "#FFFFFF",
+          }}
+          onClick={() => {
+            sessionUser ? router.push("products") : router.push("/");
+          }}
         >
-          <Typography> Logo</Typography>
-        </Link>
+          <Typography
+            sx={{
+              fontWeight: "900",
+              fontSize: "14px",
+            }}
+          >
+            {" "}
+            Business Case
+          </Typography>
+        </Button>
         {sessionUser && (
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 0 }}>
