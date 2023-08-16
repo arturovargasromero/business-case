@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 
@@ -11,23 +11,36 @@ interface IDetailProductDialogProps {
     data: string;
   };
   setDialogData: Dispatch<SetStateAction<any>>;
-  datosEdit: any;
 }
 const DetailProductDialog = (props: IDetailProductDialogProps) => {
+  const [datosEdit, setDatosEdit] = useState<any>();
+  useEffect(() => {
+    console.log(props.dialogData);
+    let datos = JSON.parse(localStorage.getItem("dataRow") || "");
+    datos = datos.filter((dato: any) => {
+      return dato.id.includes(props.dialogData.data);
+    });
+    setDatosEdit(datos[0]);
+  }, []);
+
+  console.log(datosEdit);
+
   return (
     // <Box sx={{}}>
-    <Stack
-      sx={{ marginTop: " 30px" }}
-      spacing={2}
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Stack sx={{}} spacing={2} direction="column">
+      <Typography
+        sx={{
+          fontSize: "20px",
+          textAlign: "left",
+        }}
+      >
+        {datosEdit?.nombre}
+      </Typography>
       <TextField
         id="standard-quantity"
         label="Cantidad"
         type="number"
-        value={props.datosEdit[0]?.cantidad}
+        value={datosEdit?.cantidad}
         InputProps={{
           readOnly: true,
         }}
@@ -40,7 +53,7 @@ const DetailProductDialog = (props: IDetailProductDialogProps) => {
         id="standard-price"
         label="Precio"
         type="text"
-        value={props.datosEdit[0]?.precioUnitario}
+        value={datosEdit?.precioUnitario}
         InputProps={{
           readOnly: true,
         }}
@@ -53,7 +66,7 @@ const DetailProductDialog = (props: IDetailProductDialogProps) => {
         id="standard-description"
         label="Descripción"
         multiline
-        value={props.datosEdit[0]?.descripcion}
+        value={datosEdit?.descripcion}
         rows={6}
         InputProps={{
           readOnly: true,

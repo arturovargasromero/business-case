@@ -3,13 +3,7 @@ import Stack from "@mui/material/Stack";
 
 const CreateProductDialog = () => {
   return (
-    <Stack
-      sx={{ marginTop: " 30px" }}
-      spacing={2}
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Stack sx={{ marginTop: " 30px" }} spacing={2} direction="column">
       <TextField
         id="standard-name"
         label="Nombre"

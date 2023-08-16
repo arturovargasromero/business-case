@@ -59,17 +59,12 @@ buttonSx["visualizar"] = {
 const ProductDialog = (props: IProductDialogProps) => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [datosEdit, setDatosEdit] = useState([
-    { cantidad: "", fechaAlta: "", id: "", nombre: "", precioUnitario: "" },
-  ]);
 
   useEffect(() => {
-    let datos = JSON.parse(localStorage.getItem("dataRow") || "");
-    datos = datos.filter((dato: any) => {
-      return dato.id.includes(props.dialogData.data);
-    });
-    setDatosEdit(datos);
-  }, [props.dialogData]);
+    if (localStorage.getItem("dataRow") === null) {
+      localStorage.setItem("dataRow", "[]");
+    }
+  }, [props.setDataRow]);
 
   const textDialog = (action: string, folio?: string) => {
     if (action === "eliminar") {
@@ -87,7 +82,6 @@ const ProductDialog = (props: IProductDialogProps) => {
         <DetailProductDialog
           dialogData={props.dialogData}
           setDialogData={props.setDataRow}
-          datosEdit={datosEdit}
         />
       );
     }
@@ -117,6 +111,10 @@ const ProductDialog = (props: IProductDialogProps) => {
       document.querySelector("#standard-price") as HTMLInputElement
     ).value;
 
+    const description = (
+      document.querySelector("#standard-description") as HTMLInputElement
+    ).value;
+
     const formateador = new Intl.NumberFormat("en", {
       style: "currency",
       currency: "MXN",
@@ -131,10 +129,12 @@ const ProductDialog = (props: IProductDialogProps) => {
       nombre: name,
       cantidad: quantity,
       precioUnitario: formater(Number(price)),
+      descripcion: description,
     };
     if (name !== "" && quantity !== "" && price !== "") {
       setLoading(true);
       const resp = await createProductQuery(data);
+      console.log(resp);
       props.setDataRow(resp);
       props.setDialogData({ open: false, action: props.dialogData.action });
       setLoading(false);
@@ -164,9 +164,7 @@ const ProductDialog = (props: IProductDialogProps) => {
         {action === "agregar"
           ? "Agregar producto"
           : action === "visualizar"
-          ? datosEdit.length > 0
-            ? datosEdit[0]?.nombre
-            : ""
+          ? "Ver Producto"
           : "Eliminar producto"}
       </DialogTitle>
       <DialogContent>{textDialog(action, props.dialogData.data)}</DialogContent>

@@ -16,28 +16,11 @@ const index = () => {
     const dataLocal = localStorage.getItem("dataRow");
     if (dataLocal === null) {
       localStorage.setItem("dataRow", "[]");
-      setDataRow(JSON.parse(dataLocal || ""));
     }
-
-    const products = async () => {
-      try {
-        const listProducts = await listProductsQuery();
-        setDataRow(JSON.parse(dataLocal || ""));
-        if (JSON.parse(dataLocal || "").length <= 0) {
-          localStorage.setItem(
-            "dataRow",
-            JSON.stringify([...JSON.parse(dataLocal || ""), listProducts])
-          );
-          setDataRow([...JSON.parse(dataLocal || ""), listProducts]);
-        }
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    products();
+    setTimeout(() => {
+      setDataRow(JSON.parse(dataLocal || ""));
+      setLoading(false);
+    }, 2000);
   }, []);
 
   let searchedFolio = dataRow;

@@ -64,9 +64,7 @@ const TopBar = () => {
   useEffect(() => {
     datosUser();
     localStorage.setItem("userData", JSON.stringify(user));
-
-    localStorage.setItem("dataRow", "[]");
-  }, [setUser, user]);
+  }, [setUser]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
