@@ -1,5 +1,11 @@
 import { Box, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 const Profile = () => {
+  const [user, setUser] = useState({ email: "", username: "" });
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData") || "");
+    setUser({ ...user, email: userData.email, username: userData.username });
+  }, []);
   return (
     <Box
       sx={{
@@ -29,9 +35,11 @@ const Profile = () => {
           }}
         ></Box>
         <Box>
-          <Typography sx={{ fontWeight: "600", fontSize: "18px" }}></Typography>
+          <Typography sx={{ fontWeight: "600", fontSize: "18px" }}>
+            {user.username}
+          </Typography>
           <Typography sx={{ fontWeight: "300", fontSize: "16px" }}>
-            correo@correo.com
+            {user.email}
           </Typography>
         </Box>
       </Box>

@@ -1,7 +1,7 @@
 import { sign } from "jsonwebtoken";
 import { serialize } from "cookie";
 
-export default function loginHandler(req, res) {
+export default function loginHandler(req: any, res: any) {
   const { email, password } = req.body;
   if (email === "admin@local.local" && password === "Admin123") {
     const token = sign(

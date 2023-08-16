@@ -1,10 +1,10 @@
-import { verify } from "jsonwebtoken";
+import { JwtPayload, verify } from "jsonwebtoken";
 
-export default function profileHandler(req, res) {
+export default function profileHandler(req: any, res: any) {
   const { tokenUser } = req.cookies;
 
   try {
-    const user = verify(tokenUser, "secret");
+    const user: any = verify(tokenUser, "secret");
     return res.json({ email: user.email, user: user.username });
   } catch (error) {
     return res

@@ -1,7 +1,7 @@
 import { verify } from "jsonwebtoken";
 import { serialize } from "cookie";
 
-export default function logoutHandler(req, res) {
+export default function logoutHandler(req: any, res: any) {
   const { tokenUser } = req.cookies;
   console.log(tokenUser);
   if (!tokenUser) {
@@ -9,7 +9,7 @@ export default function logoutHandler(req, res) {
   }
   try {
     const user = verify(tokenUser, "secret");
-    const serialized = serialize("tokenUser", null, {
+    const serialized = serialize("tokenUser", "null", {
       httpOnly: true, //en produccion esta cookie no podra ser vista
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict", //saber si la cookie viene del mismo dominio

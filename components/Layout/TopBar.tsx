@@ -55,6 +55,7 @@ const TopBar = () => {
         email: resp.data.email,
         username: resp.data.user,
       });
+      localStorage.setItem("userData", "[]");
       resp?.status === 200 ? router.push("/login") : "";
     } catch (error) {
       console.error(error);
@@ -63,7 +64,9 @@ const TopBar = () => {
   useEffect(() => {
     datosUser();
     console.log("render");
-  }, [setUser]);
+    localStorage.setItem("userData", JSON.stringify(user));
+  }, [setUser, user]);
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
