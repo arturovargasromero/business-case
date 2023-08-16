@@ -63,8 +63,9 @@ const TopBar = () => {
   };
   useEffect(() => {
     datosUser();
-    console.log("render");
     localStorage.setItem("userData", JSON.stringify(user));
+
+    localStorage.setItem("dataRow", "[]");
   }, [setUser, user]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
