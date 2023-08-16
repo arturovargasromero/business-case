@@ -66,7 +66,7 @@ const LoginForm = () => {
             sx={{
               width: "100%",
               maxWidth: "300px",
-              fontSize: "10px",
+              fontSize: "12px",
               textAlign: "left",
               color: "red",
             }}
@@ -90,7 +90,7 @@ const LoginForm = () => {
             sx={{
               width: "100%",
               maxWidth: "300px",
-              fontSize: "10px",
+              fontSize: "12px",
               textAlign: "left",
               color: "red",
             }}
