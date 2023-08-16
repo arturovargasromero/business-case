@@ -24,5 +24,5 @@ export default function loginHandler(req: any, res: any) {
     return res.json({ message: "login succesfully" });
   }
 
-  return res.status(401).json({ error: "invalid email or password" });
+  return res.status(401).json({ message: "Correo o contraseña invalidos" });
 }

@@ -43,6 +43,14 @@ const TopBar = () => {
         email: resp.data.email,
         username: resp.data.user,
       });
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          ...user,
+          email: resp.data.email,
+          username: resp.data.user,
+        })
+      );
     } catch (error) {
       console.error(error);
     }
@@ -55,7 +63,7 @@ const TopBar = () => {
         email: resp.data.email,
         username: resp.data.user,
       });
-      localStorage.setItem("userData", "[]");
+      localStorage.setItem("userData", "");
       resp?.status === 200 ? router.push("/login") : "";
     } catch (error) {
       console.error(error);
@@ -63,7 +71,7 @@ const TopBar = () => {
   };
   useEffect(() => {
     datosUser();
-    localStorage.setItem("userData", JSON.stringify(user));
+    console.log(user);
   }, [setUser]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {

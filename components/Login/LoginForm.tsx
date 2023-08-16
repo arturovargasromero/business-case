@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, TextField, Button, Typography, Alert } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -9,6 +9,7 @@ const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [passwordValidate, setPasswordValidate] = useState(true);
   const [emailValidate, setEmailValidate] = useState(true);
+  const [error, setError] = useState("");
   const handleOnChange = (e: any) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
 
@@ -28,9 +29,11 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const resp = await axios.post("/api/auth/login", credentials);
+      setError("");
       router.push("/products");
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      setError(error?.response?.data?.message);
     }
   };
   return (
@@ -50,6 +53,17 @@ const LoginForm = () => {
         justifyContent="center"
         alignItems="center"
       >
+        <Typography
+          sx={{
+            width: "100%",
+            maxWidth: "300px",
+            fontSize: "12px",
+            textAlign: "left",
+            color: "red",
+          }}
+        >
+          {error}
+        </Typography>
         <TextField
           sx={{ width: "100%", maxWidth: "300px" }}
           id="standard-email-input"
